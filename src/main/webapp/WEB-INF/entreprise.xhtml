@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:body>
+   <h1 style="text-align: center;"> Gestion des Entreprises </h1>
+   <hr />
+
+   <div style="position: relative; width: 50%; left: 25%; margin-top: 30px" >
+      <h:form>
+         <fieldset>
+            <legend>${entrepriseBean.label} d'une entreprise</legend>
+
+            <table width="100%" cellpadding="5">
+               <tr>
+                  <td> ID </td>
+                  <td>
+                     <h:inputText
+                             value="#{entrepriseBean.entreprise.idEntreprise}"
+                             style="background-color: silver; width: 100%;"
+                             readonly="true" />
+                  </td>
+               </tr>
+
+               <tr>
+                  <td> Nom </td>
+                  <td>
+                     <h:inputText
+                             value="#{entrepriseBean.entreprise.nomEntreprise}"
+                             style="width: 100%;" />
+                  </td>
+               </tr>
+
+               <tr>
+                  <td> Ville </td>
+                  <td>
+                     <h:inputText
+                             value="#{entrepriseBean.entreprise.villeEntreprise}"
+                             style="width: 100%;" />
+                  </td>
+               </tr>
+               <tr>
+                  <td> Tel </td>
+                  <td>
+                     <h:inputText
+                             value="#{entrepriseBean.entreprise.telEntreprise}"
+                             style="width: 100%;" />
+                  </td>
+               </tr>
+
+
+               <tr>
+                  <td colspan="2" style="text-align: right;">
+                     <h:commandButton action="#{entrepriseBean.save()}"
+                                      value="${entrepriseBean.label}" />
+                  </td>
+               </tr>
+
+
+            </table>
+
+         </fieldset>
+      </h:form>
+   </div>
+
+   <div style="position: relative; width: 60%; left: 20%; margin-top: 30px" >
+      <h:form>
+         <table border="1" width="100%" cellpadding="5" style="text-align: center;">
+            <tr>
+               <th>ID</th>
+               <th>Nom</th>
+               <th>Ville</th>
+               <th>Tel</th>
+               <th>Modifier</th>
+               <th>Supprimer</th>
+            </tr>
+
+            <ui:repeat value="${entrepriseBean.entreprises}" var="e">
+               <tr>
+                  <td>${e.idEntreprise}</td>
+                  <td>${e.nomEntreprise}</td>
+                  <td>${e.villeEntreprise}</td>
+                  <td>${e.telEntreprise}</td>
+                  <td>
+                     <h:commandLink action="#{entrepriseBean.modify(e)}">
+                        <img src="img/edit.png" alt="Modifier"/>
+                     </h:commandLink>
+                  </td>
+                  <td>
+                     <h:commandLink action="#{entrepriseBean.delete(e)}"
+                                    onclick="return confirm('Are you sure ? ')">
+                        <img src="img/drop.png" alt="Supprimer"/>
+                     </h:commandLink>
+                  </td>
+               </tr>
+            </ui:repeat>
+
+            <tfoot>
+            <tr>
+               <td colspan="5" style="text-align: center;">
+                  Nombre total des entreprises est : ${entrepriseBean.entreprises.size()}
+               </td>
+            </tr>
+            </tfoot>
+         </table>
+      </h:form>
+   </div>
+
+</h:body>
+
+</html>
